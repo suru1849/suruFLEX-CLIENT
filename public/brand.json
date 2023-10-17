@@ -1,0 +1,26 @@
+[
+  {
+      "brand_name": "Disney",
+      "brand_image": "https://i.ibb.co/SvY2YBw/Disney.png"
+  },
+  {
+      "brand_name": "Netflix",
+      "brand_image": "https://i.ibb.co/58BNF36/Netflix.jpg"
+  },
+  {
+      "brand_name": "Warner Bros",
+      "brand_image": "https://i.ibb.co/7RyW0sS/Warner-Bros.png"
+  },
+  {
+      "brand_name": "Prime Video",
+      "brand_image": "https://i.ibb.co/rdTV4FG/Amazon.jpg"
+  },
+  {
+      "brand_name": "Sony Pictures",
+      "brand_image": "https://i.ibb.co/2sgWpTX/sony.png"
+  },
+  {
+      "brand_name": "Marvel",
+      "brand_image": "https://i.ibb.co/FnbrSxv/Marvel.jpg"
+  }
+]
