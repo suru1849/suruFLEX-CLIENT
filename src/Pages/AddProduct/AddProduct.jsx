@@ -1,19 +1,21 @@
+import Swal from "sweetalert2";
+
 const AddProduct = () => {
   const handleAdd = (event) => {
     event.preventDefault();
     const form = event.target;
 
     const image = form.image.value;
-    const name = form.name.value;
-    const brandName = form.brandName.value;
-    const type = form.type.value;
+    const name = form.name.value.toUpperCase();
+    const brandName = form.brandName.value.toUpperCase();
+    const type = form.type.value.toUpperCase();
     const price = form.price.value;
     const description = form.description.value;
     const rating = form.rating.value;
 
     // clear target
     form.reset();
-
+    console.log(typeof name);
     const product = {
       image,
       name,
@@ -25,6 +27,25 @@ const AddProduct = () => {
     };
 
     console.log(product);
+
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Product added successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
+      });
   };
 
   return (
@@ -51,6 +72,7 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block  p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full "
               placeholder="Insert name"
+              required
             />
           </div>
           <div className="md:w-1/2">
@@ -61,6 +83,7 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full"
               placeholder="Insert brand name"
+              required
             />
           </div>
         </div>
