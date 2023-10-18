@@ -15,7 +15,7 @@ const AddProduct = () => {
 
     // clear target
     form.reset();
-    console.log(typeof name);
+
     const product = {
       image,
       name,
@@ -26,8 +26,7 @@ const AddProduct = () => {
       rating,
     };
 
-    console.log(product);
-
+    // SERVER
     fetch("http://localhost:5000/products", {
       method: "POST",
       headers: {
