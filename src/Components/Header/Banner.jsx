@@ -58,7 +58,7 @@ const Banner = () => {
           <button onClick={handleEnter} className="btn btn-accent">
             Enter
           </button>
-          {navigate && <Navigate to="/login"></Navigate>}
+          {navigate && <Navigate to="/register"></Navigate>}
         </div>
       </div>
     </div>
