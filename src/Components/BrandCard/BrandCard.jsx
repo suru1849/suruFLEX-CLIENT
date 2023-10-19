@@ -41,7 +41,7 @@ const BrandCard = ({ brand }) => {
 };
 
 BrandCard.propTypes = {
-  brand: PropTypes.obj,
+  brand: PropTypes.object,
   brand_name: PropTypes.string,
   brand_image: PropTypes.string,
 };

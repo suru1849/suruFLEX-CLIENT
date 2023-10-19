@@ -5,7 +5,7 @@ const AddProduct = () => {
     "DISNEY",
     "NETFLIX",
     "WARNER BROS",
-    "PRIME VIDEO",
+    "AMAZON PRIME",
     "SONY PICTURES",
     "MARVEL",
   ];
