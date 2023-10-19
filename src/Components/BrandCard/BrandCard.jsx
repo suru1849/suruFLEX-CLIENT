@@ -40,6 +40,10 @@ const BrandCard = ({ brand }) => {
   );
 };
 
-BrandCard.propTypes = {};
+BrandCard.propTypes = {
+  brand: PropTypes.obj,
+  brand_name: PropTypes.string,
+  brand_image: PropTypes.string,
+};
 
 export default BrandCard;
