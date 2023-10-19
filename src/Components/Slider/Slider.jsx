@@ -10,7 +10,7 @@ const Slider = ({ collections }) => {
       <div>
         <p className="text-3xl py-5 text-white font-bold">New Collections</p>
       </div>
-      <div className="carousel max-w-[55vh]">
+      <div className="carousel w-[300px] md:w-[400px] shadow-2xl">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={item1} className="" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
