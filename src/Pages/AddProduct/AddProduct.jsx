@@ -1,6 +1,15 @@
 import Swal from "sweetalert2";
 
 const AddProduct = () => {
+  const brandname = [
+    "DISNEY",
+    "NETFLIX",
+    "WARNER BROS",
+    "PRIME VIDEO",
+    "SONY PICTURES",
+    "MARVEL",
+  ];
+
   const handleAdd = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -13,10 +22,21 @@ const AddProduct = () => {
     const description = form.description.value;
     const rating = form.rating.value;
 
-    // clear target
-    form.reset();
+    const index = brandname.indexOf(brandName);
+    if (index < 0) {
+      Swal.fire({
+        title: "INCORECT BRAND NAME!",
+        text: "Please enter correct brand name",
+        icon: "error",
+        confirmButtonText: "OPPS",
+      });
+      return;
+    }
+
+    const category = index + 1;
 
     const product = {
+      category,
       image,
       name,
       brandName,
@@ -45,11 +65,17 @@ const AddProduct = () => {
           });
         }
       });
+
+    // clear target
+    form.reset();
   };
 
   return (
-    <div className="min-h-[90vh] flex justify-center items-center  bg-[url('https://i.ibb.co/s2d2C7G/Mass-Circles.png')] text-white">
-      <form onSubmit={handleAdd} className="w-3/4 space-y-3 my-6 ">
+    <div className="min-h-[100vh] flex justify-center items-center  bg-[url('https://i.ibb.co/s2d2C7G/Mass-Circles.png')] text-white">
+      <form
+        onSubmit={handleAdd}
+        className="w-3/4 space-y-3 my-6 bg-gray-600 p-6 rounded-xl"
+      >
         {/* image */}
         <div>
           <label className="block mb-2 text-sm font-medium">Image</label>

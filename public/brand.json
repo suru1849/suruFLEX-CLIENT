@@ -1,26 +1,29 @@
 [
-  {
-      "brand_name": "Disney",
+  {   "category":1,
+      "brand_name": "DISNEY",
       "brand_image": "https://i.ibb.co/SvY2YBw/Disney.png"
   },
-  {
-      "brand_name": "Netflix",
+  {   
+      "category":2,
+      "brand_name": "NETFLIX",
       "brand_image": "https://i.ibb.co/58BNF36/Netflix.jpg"
   },
-  {
-      "brand_name": "Warner Bros",
+  {   "category":3,
+      "brand_name": "WARNER BROS",
       "brand_image": "https://i.ibb.co/7RyW0sS/Warner-Bros.png"
   },
-  {
-      "brand_name": "Prime Video",
+  {   "category":4,
+      "brand_name": "PRIME VIDEO",
       "brand_image": "https://i.ibb.co/rdTV4FG/Amazon.jpg"
   },
-  {
-      "brand_name": "Sony Pictures",
+  {   
+      "category":5,
+      "brand_name": "SONY PICTURES",
       "brand_image": "https://i.ibb.co/2sgWpTX/sony.png"
   },
-  {
-      "brand_name": "Marvel",
+  {   
+      "category":6,
+      "brand_name": "MARVEL",
       "brand_image": "https://i.ibb.co/FnbrSxv/Marvel.jpg"
   }
 ]
