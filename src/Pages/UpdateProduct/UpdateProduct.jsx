@@ -89,7 +89,9 @@ const UpdateProduct = () => {
   return (
     <div className="min-h-[100vh] flex flex-col justify-center items-center  bg-[url('https://i.ibb.co/s2d2C7G/Mass-Circles.png')] text-white">
       <div>
-        <p className="text-3xl font-bold font-Bebas-neue">Update Product</p>
+        <p className="text-3xl font-bold font-Bebas-neue my-7">
+          Update Product
+        </p>
       </div>
       <form
         onSubmit={handleUpdate}

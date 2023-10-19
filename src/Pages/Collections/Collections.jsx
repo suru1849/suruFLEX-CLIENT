@@ -36,7 +36,7 @@ const Collections = () => {
           </div>
         </div>
       ) : (
-        <div className="text-red-600 font-extrabold text-3xl flex justify-center items-center min-h-screen ">
+        <div className="text-red-600 font-extrabold text-2xl md:text-3xl flex justify-center items-center min-h-screen ">
           <p>Sorry, No data Available now</p>
         </div>
       )}

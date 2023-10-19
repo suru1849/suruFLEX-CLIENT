@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import useAuthData from "../../Hooks/useAuthData/useAuthData";
 
 const Login = () => {
+  const { googleSignIn } = useAuthData();
+
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -19,8 +23,15 @@ const Login = () => {
     console.log(user);
   };
 
+  // Google
+  const handleGoogle = () => {
+    googleSignIn()
+      .then((res) => console.log(res.user))
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className="hero min-h-screen bg-[url('https://i.ibb.co/fdxXC4j/Animated-Shape.png')] ">
+    <div className="hero min-h-screen bg-[url('https://i.ibb.co/fdxXC4j/Animated-Shape.png')] py-5 ">
       <div className="hero-content flex flex-col ">
         <div className="text-center my-3">
           <h1 className="text-5xl font-bold font-Bebas-neue text-red-700">
@@ -28,7 +39,7 @@ const Login = () => {
           </h1>
         </div>
         <div className="card flex-shrink-0 min-w-[60vh] shadow-2xl bg-gray-500 ">
-          <form onSubmit={handleLogin} className="card-body">
+          <form onSubmit={handleLogin} className="card-body mb-0 pb-0">
             {/* Name and Email */}
             <div className="form-control">
               <label className="label">
@@ -61,14 +72,23 @@ const Login = () => {
                 type="submit"
                 value="Login"
               />
-              <p className="text-black text-center font-medium mt-2">
-                Don't have any account?{" "}
-                <Link to="/register" className="text-red-900">
-                  Register
-                </Link>
-              </p>
             </div>
           </form>
+          {/* google login */}
+          <div className="text-center card-body ">
+            <button
+              onClick={handleGoogle}
+              className="btn btn-outline font-bold min-w-[49vh]"
+            >
+              Log in with <FcGoogle className="text-2xl"></FcGoogle>
+            </button>
+            <p className="text-black text-center font-medium mt-2">
+              Don't have any account?{" "}
+              <Link to="/register" className="text-red-900">
+                Register
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
