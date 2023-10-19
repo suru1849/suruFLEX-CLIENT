@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import Register from "../Pages/Register/Register";
 import Collections from "../Pages/Collections/Collections";
 import Details from "../Pages/Details/Details";
+import UpdateProduct from "../Pages/UpdateProduct/UpdateProduct";
 
 const Router = createBrowserRouter([
   {
@@ -41,6 +42,11 @@ const Router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <Details></Details>,
+        loader: () => fetch("http://localhost:5000/products"),
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateProduct></UpdateProduct>,
         loader: () => fetch("http://localhost:5000/products"),
       },
     ],

@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddProduct = () => {
+const UpdateProduct = () => {
+  const [product, setProduct] = useState({});
+  const loadedData = useLoaderData();
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = loadedData.find((item) => item._id === id);
+    setProduct(data);
+  }, []);
+
+  const { _id, image, rating, price, type, brandName, name } = product || {};
+
   const brandname = [
     "DISNEY",
     "NETFLIX",
@@ -10,7 +24,7 @@ const AddProduct = () => {
     "MARVEL",
   ];
 
-  const handleAdd = (event) => {
+  const handleUpdate = (event) => {
     event.preventDefault();
     const form = event.target;
 
@@ -19,7 +33,6 @@ const AddProduct = () => {
     const brandName = form.brandName.value.toUpperCase();
     const type = form.type.value.toUpperCase();
     const price = form.price.value;
-    const description = form.description.value;
     const rating = form.rating.value;
 
     // Verify brand name
@@ -43,13 +56,12 @@ const AddProduct = () => {
       brandName,
       type,
       price,
-      description,
       rating,
     };
 
     // SERVER
-    fetch("http://localhost:5000/products", {
-      method: "POST",
+    fetch(`http://localhost:5000/products/${_id}`, {
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -57,13 +69,16 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        console.log(data);
+        if (data.modifiedCount) {
           Swal.fire({
-            title: "Added!",
-            text: "Product added successfully",
+            title: "Updated!",
+            text: "Product Updated successfully",
             icon: "success",
             confirmButtonText: "Cool",
           });
+
+          navigate(-1);
         }
       });
 
@@ -72,12 +87,12 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="min-h-[100vh] flex  flex-col justify-center items-center  bg-[url('https://i.ibb.co/s2d2C7G/Mass-Circles.png')] text-white">
+    <div className="min-h-[100vh] flex flex-col justify-center items-center  bg-[url('https://i.ibb.co/s2d2C7G/Mass-Circles.png')] text-white">
       <div>
-        <p className="text-3xl font-bold font-Bebas-neue">Add Product</p>
+        <p className="text-3xl font-bold font-Bebas-neue">Update Product</p>
       </div>
       <form
-        onSubmit={handleAdd}
+        onSubmit={handleUpdate}
         className="w-3/4 space-y-3 my-6 bg-gray-600 p-6 rounded-xl"
       >
         {/* image */}
@@ -89,6 +104,7 @@ const AddProduct = () => {
             id="error"
             className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
             placeholder="Import image link"
+            defaultValue={image}
           />
         </div>
         {/* name and brand-name */}
@@ -101,6 +117,7 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block  p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full "
               placeholder="Insert name"
+              defaultValue={name}
               required
             />
           </div>
@@ -112,6 +129,7 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full"
               placeholder="Insert brand name"
+              defaultValue={brandName}
               required
             />
           </div>
@@ -126,6 +144,7 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block  p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full "
               placeholder="Insert type"
+              defaultValue={type}
               required
             />
           </div>
@@ -137,21 +156,12 @@ const AddProduct = () => {
               id="error"
               className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full"
               placeholder="Insert price"
+              defaultValue={price}
               required
             />
           </div>
         </div>
-        {/* short description */}
-        <div>
-          <label className="block mb-2 text-sm font-medium">Description</label>
-          <input
-            type="text"
-            name="description"
-            id="error"
-            className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full"
-            placeholder="Write description"
-          />
-        </div>
+
         {/* ratting */}
         <div>
           <label className="block mb-2 text-sm font-medium">Rating</label>
@@ -161,15 +171,20 @@ const AddProduct = () => {
             id="error"
             className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500 w-full"
             placeholder="Insert rating"
+            defaultValue={rating}
           />
         </div>
-        {/* add */}
+        {/* update */}
         <div className="pt-2">
-          <input className="w-full btn btn-neutral" type="submit" value="Add" />
+          <input
+            className="w-full btn btn-neutral"
+            type="submit"
+            value="Update"
+          />
         </div>
       </form>
     </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

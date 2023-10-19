@@ -29,7 +29,9 @@ const CollectionsCard = ({ product }) => {
           <Link to={`/details/${_id}`}>
             <button className="btn btn-secondary">Details</button>
           </Link>
-          <button className="btn btn-primary">Update</button>
+          <Link to={`/update/${_id}`}>
+            <button className="btn btn-primary">Update</button>
+          </Link>
         </div>
       </div>
     </div>
