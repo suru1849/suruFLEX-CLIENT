@@ -35,7 +35,7 @@ const Banner = () => {
   };
 
   return (
-    <div className=" bg-[url('https://i.ibb.co/Sn7FJns/Wave.png')] min-h-[20vh]  bg-center text-white text-center py-7 space-y-2 border-2 border-red-50">
+    <div className=" bg-[url('https://i.ibb.co/Sn7FJns/Wave.png')] min-h-[20vh]  bg-center text-white text-center py-7 space-y-2 ">
       <div>
         <h1 className="text-4xl md:text-5xl text-red-600 font-bold font-Bebas-neue">
           Unlimited movies, TV shows,

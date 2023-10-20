@@ -5,7 +5,7 @@ const BrandCard = ({ brand }) => {
   const { category, brand_image, brand_name } = brand;
 
   return (
-    <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col ">
+    <div className=" bg-white border border-gray-200 dark:border-[0px]  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col ">
       <figure className="flex-grow">
         <img className="rounded-t-lg" src={brand_image} alt="" />
       </figure>
