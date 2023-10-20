@@ -2,11 +2,20 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuthData from "../../Hooks/useAuthData/useAuthData";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
 
 const Login = () => {
+  const [users, setUsers] = useState([]);
   const { googleSignIn, logIn } = useAuthData();
   const navigate = useNavigate();
   const location = useLocation();
+
+  // fetching users data form the database;
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -45,13 +54,33 @@ const Login = () => {
   // Google
   const handleGoogle = () => {
     googleSignIn()
-      .then(() => {
+      .then((res) => {
         Swal.fire({
           title: "Success!",
           text: "Log in successfully",
           icon: "success",
           confirmButtonText: "Ok",
         });
+
+        const isExist = users.find((user) => user.email === res.user.email);
+        if (!isExist) {
+          const user = {
+            name: res.user.displayName,
+            email: res.user.email,
+            image: res.user.photoURL,
+          };
+
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+        }
+
         navigate(location?.state ? location.state : "/");
       })
       .catch();

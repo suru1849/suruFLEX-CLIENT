@@ -8,6 +8,7 @@ import Collections from "../Pages/Collections/Collections";
 import Details from "../Pages/Details/Details";
 import UpdateProduct from "../Pages/UpdateProduct/UpdateProduct";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import MyCart from "../Pages/MyCart/MyCart";
 
 const Router = createBrowserRouter([
   {
@@ -28,7 +29,12 @@ const Router = createBrowserRouter([
       },
       {
         path: "/my-cart",
-        element: <div>my cart</div>,
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:5000/addToCart"),
       },
       {
         path: "/login",

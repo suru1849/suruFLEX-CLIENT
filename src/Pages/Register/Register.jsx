@@ -19,8 +19,6 @@ const Register = () => {
     const password = form.password.value;
     const image = form.image.value;
 
-    console.log(email, password);
-
     // passWordValidation
     if (password.length < 6) {
       Swal.fire({
@@ -50,19 +48,37 @@ const Register = () => {
       return;
     }
 
-    // clear target
-    form.reset();
+    const user = {
+      name,
+      email,
+      image,
+    };
 
     // createUser
     createUser(email, password)
       .then(() =>
         handleUpdateProfile(name, image).then(() => {
+          // clear target
+          form.reset();
+
           Swal.fire({
             title: "Success!",
             text: "Register successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
+
+          // added users to the database
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+
           navigate("/");
         })
       )

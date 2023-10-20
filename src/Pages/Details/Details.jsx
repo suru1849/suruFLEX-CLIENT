@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import useAuthData from "../../Hooks/useAuthData/useAuthData";
+import Swal from "sweetalert2";
 
 const Details = () => {
   const [product, setProduct] = useState({});
+  const { user } = useAuthData();
   const loadedData = useLoaderData();
   const { id } = useParams();
+  const navigaet = useNavigate();
 
   useEffect(() => {
     const data = loadedData.find((item) => item._id === id);
@@ -13,7 +17,31 @@ const Details = () => {
 
   const { image, description, name, rating } = product || {};
 
-  console.log(image);
+  const handleAddToCart = () => {
+    const cart = {
+      user: user.email,
+      product: product,
+    };
+
+    fetch("http://localhost:5000/addToCart", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(cart),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Added!",
+            text: "Product added successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
+      });
+  };
 
   return (
     <div
@@ -28,7 +56,17 @@ const Details = () => {
           </h1>
           <p className="mb-5 font-bold">Rating: {rating}</p>
           <p className="mb-5 font-bold">{description}</p>
-          <button className="btn btn-primary">Add To Cart</button>
+          <div>
+            <button onClick={handleAddToCart} className="btn btn-primary">
+              Add To Cart
+            </button>
+            <button
+              onClick={() => navigaet(-1)}
+              className="btn btn-secondary ml-3"
+            >
+              Back
+            </button>
+          </div>
         </div>
       </div>
     </div>

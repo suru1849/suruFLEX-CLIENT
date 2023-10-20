@@ -5,6 +5,7 @@ export const DataContext = createContext(null);
 
 const DataProvider = ({ children }) => {
   const [Email, setEmail] = useState(null);
+
   const darkTheme = (data) => {
     document.getElementById("body").setAttribute("data-theme", data);
   };

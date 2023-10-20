@@ -17,7 +17,7 @@ const NavBar = () => {
         <NavLink to="/add-product">Add Product</NavLink>
       </li>
       <li>
-        <NavLink to="/my-cart">My Cart</NavLink>
+        <NavLink to="my-cart">My Cart</NavLink>
       </li>
       {!user && (
         <li>
@@ -107,7 +107,7 @@ const NavBar = () => {
                 {user?.photoURL ? (
                   <img
                     className="object-contain rounded-full"
-                    src={user?.photoURL}
+                    src={user.photoURL}
                     alt=""
                   />
                 ) : (
@@ -121,7 +121,7 @@ const NavBar = () => {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              <p className="">{user?.displayName}</p>
+              <p className="">{user.displayName}</p>
               <li>
                 <p onClick={handleLogOut}>Logout</p>
               </li>
