@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -16,16 +17,19 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
 
   // createUser
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // signIN
   const logIn = (email, password) => {
-    return signInWithPopup(auth, email, password);
+    setUser(true);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   // update profile
@@ -45,12 +49,14 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
 
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // observe current user
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoading(false);
       console.log("observe", currentUser);
       setUser(currentUser);
     });
@@ -69,6 +75,7 @@ const AuthProvider = ({ children }) => {
     handleUpdateProfile,
     logOut,
     googleSignIn,
+    loading,
   };
 
   return (

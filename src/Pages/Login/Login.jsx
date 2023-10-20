@@ -1,13 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuthData from "../../Hooks/useAuthData/useAuthData";
 import Swal from "sweetalert2";
-import { useState } from "react";
 
 const Login = () => {
-  const [valid, setValid] = useState(true);
   const { googleSignIn, logIn } = useAuthData();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -16,7 +15,36 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    console.log(email, password);
+
     logIn(email, password)
+      .then(() => {
+        // target-clear
+        form.reset();
+
+        // notify
+        Swal.fire({
+          title: "Success!",
+          text: "Log in successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: "Invalid email or password",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
+  };
+
+  // Google
+  const handleGoogle = () => {
+    googleSignIn()
       .then(() => {
         Swal.fire({
           title: "Success!",
@@ -24,31 +52,9 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Ok",
         });
-        navigate("/");
+        navigate(location?.state ? location.state : "/");
       })
-      .catch(() => {
-        Swal.fire({
-          title: "Error!",
-          text: "Invalid email or password",
-          icon: "error",
-          confirmButtonText: "Ok",
-        });
-        setValid(!valid);
-      });
-
-    console.log(valid);
-
-    // clear target
-    if (valid) {
-      form.reset();
-    }
-  };
-
-  // Google
-  const handleGoogle = () => {
-    googleSignIn()
-      .then((res) => console.log(res.user))
-      .catch((err) => console.log(err));
+      .catch();
   };
 
   return (

@@ -19,6 +19,8 @@ const Register = () => {
     const password = form.password.value;
     const image = form.image.value;
 
+    console.log(email, password);
+
     // passWordValidation
     if (password.length < 6) {
       Swal.fire({
