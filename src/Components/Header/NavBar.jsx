@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
-  const { darkTheme } = useDataData();
+  const { setData } = useDataData();
   const { user, logOut } = useAuthData();
   const [cUser, setCuser] = useState({});
 
@@ -88,7 +88,7 @@ const NavBar = () => {
 
           {/* sun icon */}
           <svg
-            onClick={() => darkTheme("dark")}
+            onClick={() => setData("dark")}
             className="swap-on fill-current w-6 h-6 md:w-8 md:h-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -98,7 +98,7 @@ const NavBar = () => {
 
           {/* moon icon */}
           <svg
-            onClick={() => darkTheme("light")}
+            onClick={() => setData("light")}
             className="swap-off fill-current w-6 h-6 md:w-8 md:h-8"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
