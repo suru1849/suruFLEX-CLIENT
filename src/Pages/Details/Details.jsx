@@ -23,13 +23,16 @@ const Details = () => {
       product: product,
     };
 
-    fetch("https://entertainment-and-media-server-eosin.vercel.app/addToCart", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(cart),
-    })
+    fetch(
+      "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/addToCart",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(cart),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

@@ -61,7 +61,7 @@ const UpdateProduct = () => {
 
     // SERVER
     fetch(
-      `https://entertainment-and-media-server-eosin.vercel.app/products/${_id}`,
+      `https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products/${_id}`,
       {
         method: "PATCH",
         headers: {

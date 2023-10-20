@@ -48,13 +48,16 @@ const AddProduct = () => {
     };
 
     // SERVER
-    fetch("https://entertainment-and-media-server-eosin.vercel.app/products", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
+    fetch(
+      "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(product),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {

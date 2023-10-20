@@ -38,7 +38,7 @@ const Router = createBrowserRouter([
         ),
         loader: () =>
           fetch(
-            "https://entertainment-and-media-server-eosin.vercel.app/addToCart"
+            "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/addToCart"
           ),
       },
       {
@@ -54,7 +54,7 @@ const Router = createBrowserRouter([
         element: <Collections></Collections>,
         loader: ({ params }) =>
           fetch(
-            `https://entertainment-and-media-server-eosin.vercel.app/products/${params.category}`
+            `https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products/${params.category}`
           ),
       },
       {
@@ -66,7 +66,7 @@ const Router = createBrowserRouter([
         ),
         loader: () =>
           fetch(
-            "https://entertainment-and-media-server-eosin.vercel.app/products"
+            "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products"
           ),
       },
       {
@@ -78,7 +78,7 @@ const Router = createBrowserRouter([
         ),
         loader: () =>
           fetch(
-            "https://entertainment-and-media-server-eosin.vercel.app/products"
+            "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products"
           ),
       },
     ],
