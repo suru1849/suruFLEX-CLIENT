@@ -3,10 +3,16 @@ import useDataData from "../../Hooks/useDataData/useDataData";
 import useAuthData from "../../Hooks/useAuthData/useAuthData";
 import Swal from "sweetalert2";
 import { CgProfile } from "react-icons/cg";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
   const { darkTheme } = useDataData();
   const { user, logOut } = useAuthData();
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    setCurrentUser(user);
+  }, []);
 
   const navLinks = (
     <>
@@ -28,14 +34,15 @@ const NavBar = () => {
   );
 
   const handleLogOut = () => {
-    logOut().then(() =>
+    logOut().then(() => {
       Swal.fire({
         title: "LogOut!",
         text: "Log out successfully",
         icon: "success",
         confirmButtonText: "Ok",
-      })
-    );
+      });
+      setCurrentUser();
+    });
   };
 
   return (
@@ -104,10 +111,10 @@ const NavBar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <figure className="w-14 h-12">
-                {user?.photoURL ? (
+                {currentUser?.photoURL ? (
                   <img
                     className="object-contain rounded-full"
-                    src={user.photoURL}
+                    src={currentUser?.photoURL}
                     alt=""
                   />
                 ) : (
@@ -121,7 +128,7 @@ const NavBar = () => {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
-              <p className="">{user.displayName}</p>
+              <p className="">{currentUser?.displayName}</p>
               <li>
                 <p onClick={handleLogOut}>Logout</p>
               </li>

@@ -58,15 +58,10 @@ const Register = () => {
     createUser(email, password)
       .then(() =>
         handleUpdateProfile(name, image).then(() => {
+          navigate("/");
+
           // clear target
           form.reset();
-
-          Swal.fire({
-            title: "Success!",
-            text: "Register successfully",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
 
           // added users to the database
           fetch("http://localhost:5000/users", {
@@ -77,9 +72,16 @@ const Register = () => {
             body: JSON.stringify(user),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
-
-          navigate("/");
+            .then((data) => {
+              if (data.insertedId) {
+                Swal.fire({
+                  title: "Success!",
+                  text: "Register successfully",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+                });
+              }
+            });
         })
       )
       .catch(() =>
@@ -154,6 +156,7 @@ const Register = () => {
                 name="image"
                 placeholder="Enter your image link"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control mt-6">
