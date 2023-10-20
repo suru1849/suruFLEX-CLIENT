@@ -56,34 +56,35 @@ const Register = () => {
 
     // createUser
     createUser(email, password)
-      .then(() =>
-        handleUpdateProfile(name, image).then(() => {
-          navigate("/");
+      .then(() => {
+        // Set displayName and image
+        handleUpdateProfile(name, image);
 
-          // clear target
-          form.reset();
+        navigate("/");
 
-          // added users to the database
-          fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(user),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.insertedId) {
-                Swal.fire({
-                  title: "Success!",
-                  text: "Register successfully",
-                  icon: "success",
-                  confirmButtonText: "Ok",
-                });
-              }
-            });
+        // added users to the database
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
         })
-      )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "Register successfully",
+                icon: "success",
+                confirmButtonText: "Ok",
+              });
+            }
+          });
+
+        // clear target
+        form.reset();
+      })
       .catch(() =>
         Swal.fire({
           title: "Invalid!",
