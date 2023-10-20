@@ -12,7 +12,7 @@ const Studios = () => {
 
   return (
     <div className="my-10 max-w-screen-xl mx-auto">
-      <h1 className="text-3xl font-Bebas-neue font-bold text-center text-red-700 my-2">
+      <h1 className="text-4xl font-Bebas-neue font-bold text-center text-red-700 my-4">
         Studio
       </h1>
       {/* brand container */}
