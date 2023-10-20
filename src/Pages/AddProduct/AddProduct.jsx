@@ -48,7 +48,7 @@ const AddProduct = () => {
     };
 
     // SERVER
-    fetch("http://localhost:5000/products", {
+    fetch("https://entertainment-and-media-server-eosin.vercel.app/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",

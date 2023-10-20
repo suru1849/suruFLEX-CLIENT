@@ -60,13 +60,16 @@ const UpdateProduct = () => {
     };
 
     // SERVER
-    fetch(`http://localhost:5000/products/${_id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
+    fetch(
+      `https://entertainment-and-media-server-eosin.vercel.app/products/${_id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(product),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

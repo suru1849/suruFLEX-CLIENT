@@ -23,7 +23,7 @@ const Details = () => {
       product: product,
     };
 
-    fetch("http://localhost:5000/addToCart", {
+    fetch("https://entertainment-and-media-server-eosin.vercel.app/addToCart", {
       method: "POST",
       headers: {
         "content-type": "application/json",

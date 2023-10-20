@@ -1,11 +1,13 @@
 import Accordion from "../../Components/Accordion/Accordion";
 import Banner from "../../Components/Header/Banner";
+import useAuthData from "../../Hooks/useAuthData/useAuthData";
 import Studios from "./Studios/Studios";
 
 const Home = () => {
+  const { user } = useAuthData();
   return (
     <div>
-      <Banner></Banner>
+      {!user && <Banner></Banner>}
       <Studios></Studios>
       <Accordion></Accordion>
       <div className="my-10 flex gap-5 flex-col-reverse md:flex-row-reverse lg:flex-row justify-between items-center max-w-screen-xl mx-auto px-2">

@@ -1,13 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const DataContext = createContext(null);
 
 const DataProvider = ({ children }) => {
   const [Email, setEmail] = useState(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState("light");
 
-  document.getElementById("body").setAttribute("data-theme", data);
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", data);
+  }, [data]);
 
   const dataInfo = {
     Email,

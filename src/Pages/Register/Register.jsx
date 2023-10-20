@@ -63,7 +63,7 @@ const Register = () => {
         navigate("/");
 
         // added users to the database
-        fetch("http://localhost:5000/users", {
+        fetch("https://entertainment-and-media-server-eosin.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

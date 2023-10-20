@@ -36,7 +36,10 @@ const Router = createBrowserRouter([
             <MyCart></MyCart>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/addToCart"),
+        loader: () =>
+          fetch(
+            "https://entertainment-and-media-server-eosin.vercel.app/addToCart"
+          ),
       },
       {
         path: "/login",
@@ -50,7 +53,9 @@ const Router = createBrowserRouter([
         path: "/collections/:category",
         element: <Collections></Collections>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.category}`),
+          fetch(
+            `https://entertainment-and-media-server-eosin.vercel.app/products/${params.category}`
+          ),
       },
       {
         path: "/details/:id",
@@ -59,7 +64,10 @@ const Router = createBrowserRouter([
             <Details></Details>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () =>
+          fetch(
+            "https://entertainment-and-media-server-eosin.vercel.app/products"
+          ),
       },
       {
         path: "/update/:id",
@@ -68,7 +76,10 @@ const Router = createBrowserRouter([
             <UpdateProduct></UpdateProduct>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () =>
+          fetch(
+            "https://entertainment-and-media-server-eosin.vercel.app/products"
+          ),
       },
     ],
   },
