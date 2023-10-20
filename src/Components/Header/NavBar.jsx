@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import useDataData from "../../Hooks/useDataData/useDataData";
 import useAuthData from "../../Hooks/useAuthData/useAuthData";
 import Swal from "sweetalert2";
+import { CgProfile } from "react-icons/cg";
 
 const NavBar = () => {
   const { darkTheme } = useDataData();
@@ -18,9 +19,11 @@ const NavBar = () => {
       <li>
         <NavLink to="/my-cart">My Cart</NavLink>
       </li>
-      <li>
-        <NavLink to="/login">Login</NavLink>
-      </li>
+      {!user && (
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -100,12 +103,18 @@ const NavBar = () => {
         {user && (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <figure className="w-14">
-                <img
-                  className="w-full rounded-full"
-                  src={user?.photoURL}
-                  alt=""
-                />
+              <figure className="w-14 h-12">
+                {user?.photoURL ? (
+                  <img
+                    className="object-contain rounded-full"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                ) : (
+                  <div>
+                    <CgProfile className="text-5xl"></CgProfile>
+                  </div>
+                )}
               </figure>
             </label>
             <ul

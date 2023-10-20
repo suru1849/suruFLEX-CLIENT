@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuthData from "../../Hooks/useAuthData/useAuthData";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const Login = () => {
-  const { googleSignIn } = useAuthData();
+  const [valid, setValid] = useState(true);
+  const { googleSignIn, logIn } = useAuthData();
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -12,15 +16,32 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+    logIn(email, password)
+      .then(() => {
+        Swal.fire({
+          title: "Success!",
+          text: "Log in successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        navigate("/");
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Error!",
+          text: "Invalid email or password",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+        setValid(!valid);
+      });
+
+    console.log(valid);
+
     // clear target
-    form.reset();
-
-    const user = {
-      email,
-      password,
-    };
-
-    console.log(user);
+    if (valid) {
+      form.reset();
+    }
   };
 
   // Google

@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDataData from "../../Hooks/useDataData/useDataData";
+import useAuthData from "../../Hooks/useAuthData/useAuthData";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { Email, setEmail } = useDataData();
+  const { createUser, handleUpdateProfile } = useAuthData();
+  const navigate = useNavigate();
 
   console.log(Email);
 
@@ -15,17 +19,59 @@ const Register = () => {
     const password = form.password.value;
     const image = form.image.value;
 
+    // passWordValidation
+    if (password.length < 6) {
+      Swal.fire({
+        title: "Invalid!",
+        text: "Password should at least 6 character",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      Swal.fire({
+        title: "Invalid!",
+        text: "Password should include 'CAPITAL' letter",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+    if (!/[@,$,#,-, ,%,^,*,!,(,)]/.test(password)) {
+      Swal.fire({
+        title: "Invalid!",
+        text: "Password should include 'SPECIAL' letter",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      return;
+    }
+
     // clear target
     form.reset();
 
-    const user = {
-      name,
-      email,
-      password,
-      image,
-    };
-
-    console.log(user);
+    // createUser
+    createUser(email, password)
+      .then(() =>
+        handleUpdateProfile(name, image).then(() => {
+          Swal.fire({
+            title: "Success!",
+            text: "Register successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          navigate("/");
+        })
+      )
+      .catch(() =>
+        Swal.fire({
+          title: "Invalid!",
+          text: "This email is already used",
+          icon: "error",
+          confirmButtonText: "Ok",
+        })
+      );
 
     // setDefault value to null
     setEmail("");
