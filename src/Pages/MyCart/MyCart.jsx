@@ -27,7 +27,7 @@ const MyCart = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/addToCart/${id}`,
+          `https://entertainment-and-media-server-n5uzosdjn-sleepings-projects.vercel.app/addToCart/${id}`,
           {
             method: "DELETE",
           }

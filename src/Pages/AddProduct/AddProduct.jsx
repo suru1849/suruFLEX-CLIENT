@@ -49,7 +49,7 @@ const AddProduct = () => {
 
     // SERVER
     fetch(
-      "https://entertainment-and-media-server-74sd12kyg-sleepings-projects.vercel.app/products",
+      "https://entertainment-and-media-server-n5uzosdjn-sleepings-projects.vercel.app/products",
       {
         method: "POST",
         headers: {
